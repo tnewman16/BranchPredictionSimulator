@@ -2,23 +2,23 @@ using System;
 
 namespace BranchPredictionSimulator.Model.Prediction
 {
-  public class SaturatingCounter
+  public class SaturatingCounter : IBranchPredictor
   {
     private readonly int _max;
-    public int Position { get; private set; }
+    private int Position { get; set; }
 
-    public SaturatingCounter(int numBits)
+    public SaturatingCounter(int numBits = 2)
     {
       _max = (int) Math.Pow(2, numBits);
       Position = _max / 2 + 1;
     }
 
-    public void Increment()
+    public void HandleTaken()
     {
       Position = Position >= _max ? Position : Position + 1;
     }
 
-    public void Decrement()
+    public void HandleNotTaken()
     {
       Position = Position <= 1 ? Position : Position - 1;
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using BranchPredictionSimulator.Model.Prediction;
 using BranchPredictionSimulator.Model.Program;
 
 namespace BranchPredictionSimulator
@@ -7,8 +8,13 @@ namespace BranchPredictionSimulator
   {
     private static void Main(string[] args)
     {
-      var program = new Program();
-      Console.WriteLine(program);
+      var historyTable = new HistoryTable<SaturatingCounter>(() => new SaturatingCounter());
+      var program = new Program<SaturatingCounter>(historyTable);
+      while (program.ExecuteNext())
+      {
+      }
+
+      Console.WriteLine($"Accuracy: {historyTable.GetAccuracy()}");
     }
   }
 }

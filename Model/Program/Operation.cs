@@ -10,36 +10,32 @@ namespace BranchPredictionSimulator.Model.Program
 
     public Operation(int line, Register regInLeft, Register regInRight, Operator op, Register regOut) : base(line)
     {
+      Str = $"#{line}";
       switch (op)
       {
         case Operator.Add:
-          _function = () => regInLeft.Value + regInRight.Value;
-          Str = $"#{line}:  {regOut} = {regInLeft} + {regInRight}";
+          _function = () =>
+          {
+            Str = $"#{line}:  {regOut} = {regInLeft} + {regInRight}";
+            return regInLeft.Value + regInRight.Value;
+          };
           break;
         case Operator.Subtract:
-          _function = () => regInLeft.Value - regInRight.Value;
-          Str = $"#{line}:  {regOut} = {regInLeft} - {regInRight}";
-          break;
-        case Operator.Multiply:
-          _function = () => regInLeft.Value * regInRight.Value;
-          Str = $"#{line}:  {regOut} = {regInLeft} * {regInRight}";
-          break;
-        case Operator.Divide:
-          _function = () => regInLeft.Value / regInRight.Value;
-          Str = $"#{line}:  {regOut} = {regInLeft} / {regInRight}";
-          break;
-        default:
-          _function = () => regOut.Value;
+          _function = () =>
+          {
+            Str = $"#{line}:  {regOut} = {regInLeft} - {regInRight}";
+            return regInLeft.Value - regInRight.Value;
+          };
           break;
       }
 
       _regOut = regOut;
     }
 
-    public override int Execute()
+    public override bool Execute()
     {
       _regOut.Value = _function();
-      return Line + 1;
+      return false;
     }
   }
 }

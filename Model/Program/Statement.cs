@@ -3,14 +3,14 @@ namespace BranchPredictionSimulator.Model.Program
   public abstract class Statement
   {
     public readonly int Line;
-    protected string Str;
+    protected string Str { private get; set; }
 
-    public Statement(int line)
+    protected Statement(int line)
     {
       Line = line;
     }
 
-    public abstract int Execute();
+    public abstract bool Execute();
 
     public override string ToString()
     {

@@ -5,37 +5,56 @@ namespace BranchPredictionSimulator.Model.Program
 {
   public class Branch : Statement
   {
-    private readonly int _destination;
+    public int Destination { get; }
     private readonly Func<bool> _function;
 
     public Branch(int line, int destination, Register regInLeft, Register regInRight, Comparison op) : base(line)
     {
-      _destination = destination;
+      Str = $"#{line}";
+      Destination = destination;
       switch (op)
       {
         case Comparison.Equal:
-          _function = () => regInLeft.Value == regInRight.Value;
-          Str = $"#{line}:  {regInLeft} == {regInRight} ?? {destination} <BRANCH>";
+          _function = () =>
+          {
+            Str = $"#{line}:  {regInLeft} == {regInRight} ?? {destination} <BRANCH>";
+            return regInLeft.Value == regInRight.Value;
+          };
           break;
         case Comparison.NotEqual:
-          _function = () => regInLeft.Value != regInRight.Value;
-          Str = $"#{line}:  {regInLeft} != {regInRight} ?? {destination} <BRANCH>";
+          _function = () =>
+          {
+            Str = $"#{line}:  {regInLeft} != {regInRight} ?? {destination} <BRANCH>";
+            return regInLeft.Value != regInRight.Value;
+          };
           break;
         case Comparison.GreaterThan:
-          _function = () => regInLeft.Value > regInRight.Value;
-          Str = $"#{line}:  {regInLeft} > {regInRight} ?? {destination} <BRANCH>";
+          _function = () =>
+          {
+            Str = $"#{line}:  {regInLeft} > {regInRight} ?? {destination} <BRANCH>";
+            return regInLeft.Value > regInRight.Value;
+          };
           break;
         case Comparison.LessThan:
-          _function = () => regInLeft.Value < regInRight.Value;
-          Str = $"#{line}:  {regInLeft} < {regInRight} ?? {destination} <BRANCH>";
+          _function = () =>
+          {
+            Str = $"#{line}:  {regInLeft} < {regInRight} ?? {destination} <BRANCH>";
+            return regInLeft.Value < regInRight.Value;
+          };
           break;
         case Comparison.GreaterThanOrEqual:
-          _function = () => regInLeft.Value >= regInRight.Value;
-          Str = $"#{line}:  {regInLeft} >= {regInRight} ?? {destination} <BRANCH>";
+          _function = () =>
+          {
+            Str = $"#{line}:  {regInLeft} >= {regInRight} ?? {destination} <BRANCH>";
+            return regInLeft.Value >= regInRight.Value;
+          };
           break;
         case Comparison.LessThanOrEqual:
-          _function = () => regInLeft.Value <= regInRight.Value;
-          Str = $"#{line}:  {regInLeft} <= {regInRight} ?? {destination} <BRANCH>";
+          _function = () =>
+          {
+            Str = $"#{line}:  {regInLeft} <= {regInRight} ?? {destination} <BRANCH>";
+            return regInLeft.Value <= regInRight.Value;
+          };
           break;
         default:
           _function = () => false;
@@ -43,9 +62,9 @@ namespace BranchPredictionSimulator.Model.Program
       }
     }
 
-    public override int Execute()
+    public override bool Execute()
     {
-      return _function() ? _destination : Line;
+      return _function();
     }
   }
 }
