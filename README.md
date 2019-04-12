@@ -60,28 +60,37 @@ predictions on whether the branches within the program will be "taken" or "not t
 * This file looks like the following:
   ```json
   {
-    "NumStatements": 1000,
-    "NumBranches": 100,
-    "NumRegisters": 8,
-    "MaxInitialRegisterValue": 50,
-    "StatementsExecuted": 1959610,
-    "BranchesExecuted": 122518,
-    "ExecutionHalted": false,
-    "RegisterResets": [
-      {
-        "StatementsExecutedSinceLastReset": 980862,
-        "SecondsSinceLastReset": 2.005543,
-        "RegisterValuesOnReset": [1080403472, -1727880304, 313647392, 1391896016, -311492544, -1822667808, 744419184, 2136315200]
-      }
-    ],
-    "Predictions": [
-      {
-        "Line": 0,
-        "Actual": false,
-        "Prediction": true
-      }
-    ],
-    "Accuracy": 0.99939600711732157
+      "NumStatements": 1000,
+      "NumBranches": 100,
+      "NumRegisters": 8,
+      "MaxInitialRegisterValue": 50,
+      "StatementsExecuted": 1959610,
+      "BranchesExecuted": 122518,
+      "ExecutionHalted": false,
+      "RegisterResets": [
+          {
+              "StatementsExecutedSinceLastReset": 980862,
+              "SecondsSinceLastReset": 2.005543,
+              "RegisterValuesOnReset": [
+                  1080403472,
+                  -1727880304,
+                  313647392,
+                  1391896016,
+                  -311492544,
+                  -1822667808,
+                  744419184,
+                  2136315200
+              ]
+          }
+      ],
+      "Predictions": [
+          {
+              "Line": 0,
+              "Actual": false,
+              "Prediction": true
+          }
+      ],
+      "Accuracy": 0.99939600711732157
   }
   ```
 
